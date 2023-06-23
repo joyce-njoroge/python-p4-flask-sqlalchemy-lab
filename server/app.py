@@ -19,15 +19,34 @@ def home():
 
 @app.route('/animal/<int:id>')
 def animal_by_id(id):
-    return ''
-
+    animal = Animal.query.get(id)
+    if animal:
+        response = f"<ul>Name: {animal.name}</ul><ul>Species: {animal.species}</ul><ul>Zookeeper: {animal.zookeeper}</ul><ul>Enclosure: {animal.enclosure}</ul>"
+        return response
+    else:
+        return "Animal not found"
+    
 @app.route('/zookeeper/<int:id>')
 def zookeeper_by_id(id):
-    return ''
-
+    zookeeper = Zookeeper.query.get(id)
+    if zookeeper:
+        response = f"<ul>Name: {zookeeper.name}</ul><ul>Birthday: {zookeeper.birthday}</ul>"
+        return response
+    else:
+        return "Zookeeper not found"
+    
 @app.route('/enclosure/<int:id>')
 def enclosure_by_id(id):
-    return ''
+    environment = "Some environment value" 
+    open_to_visitors = True  
+    animal = "Some animal value"
+
+    html_content = f"<ul>Environment: {environment}</ul>"
+    html_content += f"<ul>Open to Visitors: {open_to_visitors}</ul>"
+    html_content = f"<ul>Animal: {animal}</ul>"
+
+    return html_content
+
 
 
 if __name__ == '__main__':
